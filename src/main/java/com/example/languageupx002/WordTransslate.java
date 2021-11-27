@@ -73,6 +73,15 @@ public class WordTransslate extends AppCompatActivity {
                         textView2.setText(c);
                     });
                 }
+                if (right + fail >= k){
+                    try {
+                        Intent intent = new Intent(WordTransslate.this, Itog.class);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             } while (cursor.moveToNext());
         } else
             Log.d("mLog","0 rows");
