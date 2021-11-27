@@ -1,6 +1,8 @@
 package com.example.languageupx002;
 
+import static com.example.languageupx002.Table.fail;
 import static com.example.languageupx002.Table.k;
+import static com.example.languageupx002.Table.right;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,9 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         k = 0;
+        right = 0;
+        fail = 0;
         final Button addButton = (Button) findViewById(R.id.button12);
         final Button list = (Button) findViewById(R.id.button2);
         final Button test1 = (Button) findViewById(R.id.button);
+        final Button test = (Button) findViewById(R.id.button10);
         db = new DBhelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
@@ -70,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
         test1.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainActivity.this, WordTransslate.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+        test.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(MainActivity.this, Test.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
