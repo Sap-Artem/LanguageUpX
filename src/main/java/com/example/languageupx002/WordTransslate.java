@@ -3,6 +3,8 @@ package com.example.languageupx002;
 
 import static com.example.languageupx002.Table.fail;
 import static com.example.languageupx002.Table.k;
+import static com.example.languageupx002.Table.rand1;
+import static com.example.languageupx002.Table.rand2;
 import static com.example.languageupx002.Table.right;
 
 import android.content.ContentValues;
@@ -45,7 +47,10 @@ public class WordTransslate extends AppCompatActivity {
         TextView textfail = findViewById(R.id.textView10);
         Cursor cursor = database.query(DBhelper.TABLE_CONTACTS, null, null, null, null, null, null);
         ContentValues contentValues = new ContentValues();
-        int i = (int)(Math.random()*(k)+1);
+        rand2 = rand2 + rand1;
+        if (rand2>k){
+            rand2 = rand2 - k;
+        }
         int idIndex = cursor.getColumnIndex(DBhelper.KEY_ID);
         int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
@@ -53,7 +58,7 @@ public class WordTransslate extends AppCompatActivity {
         textfail.setText(Integer.toString(fail));
         if (cursor.moveToFirst()) {
             do {
-                if (i == cursor.getInt(idIndex)) {
+                if (rand2 == cursor.getInt(idIndex)) {
                     String a = cursor.getString(nameIndex);
                     textView.setText(a);
                     String b = cursor.getString(emailIndex);
@@ -72,6 +77,15 @@ public class WordTransslate extends AppCompatActivity {
                         }
                         textView2.setText(c);
                     });
+                }
+                if (right + fail >= k){
+                    try {
+                        Intent intent = new Intent(WordTransslate.this, Itog.class);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             } while (cursor.moveToNext());
         } else
