@@ -9,22 +9,17 @@ import static com.example.languageupx002.Table.right;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Random;
-
-public class WordTransslate extends AppCompatActivity {
+public class TransslateWord extends AppCompatActivity {
     DBhelper dbHelper;
     DopDB DB;
     String m;
@@ -32,7 +27,7 @@ public class WordTransslate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wordtranslate);
+        setContentView(R.layout.translateword);
         final Button quitButton = (Button) findViewById(R.id.button15);
         final Button nextButton = (Button) findViewById(R.id.button13);
         final Button checkButton = (Button) findViewById(R.id.button11);
@@ -59,9 +54,9 @@ public class WordTransslate extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             do {
                 if (rand2 == cursor.getInt(idIndex)) {
-                    String a = cursor.getString(nameIndex);
+                    String a = cursor.getString(emailIndex);
                     textView.setText(a);
-                    String b = cursor.getString(emailIndex);
+                    String b = cursor.getString(nameIndex);
                     checkButton.setOnClickListener((v) -> {
                         String c;
                         String translate = edittranslate.getText().toString();
@@ -80,7 +75,7 @@ public class WordTransslate extends AppCompatActivity {
                 }
                 if (right + fail >= k){
                     try {
-                        Intent intent = new Intent(WordTransslate.this, Itog.class);
+                        Intent intent = new Intent(TransslateWord.this, Itog.class);
                         startActivity(intent);
                         finish();
                     } catch (Exception e) {
@@ -93,7 +88,7 @@ public class WordTransslate extends AppCompatActivity {
         database2.insert(DopDB.TABLE_CONTACTS2, null, contentValues);
         quitButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(WordTransslate.this, MainActivity.class);
+                Intent intent = new Intent(TransslateWord.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -103,7 +98,7 @@ public class WordTransslate extends AppCompatActivity {
         });
         nextButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(WordTransslate.this, WordTransslate.class);
+                Intent intent = new Intent(TransslateWord.this, TransslateWord.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
