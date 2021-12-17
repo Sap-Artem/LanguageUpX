@@ -31,7 +31,6 @@ public class AddText extends AppCompatActivity {
         EditText edittranslate = findViewById(R.id.editTranslate);
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         quitButton.setOnClickListener((v) -> {
             try {
