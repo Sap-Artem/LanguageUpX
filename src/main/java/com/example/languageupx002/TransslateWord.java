@@ -19,9 +19,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class WordTransslate extends AppCompatActivity {
+public class TransslateWord extends AppCompatActivity {
     DBhelper dbHelper;
     DopDB DB;
     String m;
@@ -29,7 +27,7 @@ public class WordTransslate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wordtranslate);
+        setContentView(R.layout.translateword);
         final Button quitButton = (Button) findViewById(R.id.button15);
         final Button nextButton = (Button) findViewById(R.id.button13);
         final Button checkButton = (Button) findViewById(R.id.button11);
@@ -48,7 +46,6 @@ public class WordTransslate extends AppCompatActivity {
         if (rand2>k){
             rand2 = rand2 - k;
         }
-        AtomicInteger flag = new AtomicInteger();
         int idIndex = cursor.getColumnIndex(DBhelper.KEY_ID);
         int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
@@ -57,31 +54,28 @@ public class WordTransslate extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             do {
                 if (rand2 == cursor.getInt(idIndex)) {
-                    String a = cursor.getString(nameIndex);
+                    String a = cursor.getString(emailIndex);
                     textView.setText(a);
-                    String b = cursor.getString(emailIndex);
+                    String b = cursor.getString(nameIndex);
                     checkButton.setOnClickListener((v) -> {
-                        if(flag.get() == 0){
-                            String c;
-                            String translate = edittranslate.getText().toString();
-                            contentValues.put(DopDB.ANSWER, translate);
-                            if(b.equals(translate)){
-                                c = "Yes";
-                                contentValues.put(DopDB.SCORE, "1");
-                                right = right + 1;
-                            }else{
-                                c = "No, it is " + b;
-                                contentValues.put(DopDB.SCORE, "0");
-                                fail = fail + 1;
-                            }
-                            textView2.setText(c);
-                            flag.set(1);
+                        String c;
+                        String translate = edittranslate.getText().toString();
+                        contentValues.put(DopDB.ANSWER, translate);
+                        if(b.equals(translate)){
+                            c = "Yes";
+                            contentValues.put(DopDB.SCORE, "1");
+                            right = right + 1;
+                        }else{
+                            c = "No, it is " + b;
+                            contentValues.put(DopDB.SCORE, "0");
+                            fail = fail + 1;
                         }
+                        textView2.setText(c);
                     });
                 }
                 if (right + fail >= k){
                     try {
-                        Intent intent = new Intent(WordTransslate.this, Itog.class);
+                        Intent intent = new Intent(TransslateWord.this, Itog.class);
                         startActivity(intent);
                         finish();
                     } catch (Exception e) {
@@ -94,7 +88,7 @@ public class WordTransslate extends AppCompatActivity {
         database2.insert(DopDB.TABLE_CONTACTS2, null, contentValues);
         quitButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(WordTransslate.this, MainActivity.class);
+                Intent intent = new Intent(TransslateWord.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -104,7 +98,7 @@ public class WordTransslate extends AppCompatActivity {
         });
         nextButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(WordTransslate.this, WordTransslate.class);
+                Intent intent = new Intent(TransslateWord.this, TransslateWord.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
