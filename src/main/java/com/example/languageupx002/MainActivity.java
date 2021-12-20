@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         fail = 0;
         final Button addButton = (Button) findViewById(R.id.button12);
         final Button list = (Button) findViewById(R.id.button2);
+        final Button couple = (Button) findViewById(R.id.button4);
         final Button test1 = (Button) findViewById(R.id.button);
         final Button test2 = (Button) findViewById(R.id.button3);
         final Button test = (Button) findViewById(R.id.button10);
@@ -113,6 +114,16 @@ public class MainActivity extends AppCompatActivity {
         test.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainActivity.this, Test.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+        couple.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(MainActivity.this, Couple.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {

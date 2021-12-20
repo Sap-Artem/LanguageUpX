@@ -27,6 +27,7 @@ public class AddText extends AppCompatActivity {
         final Button quitButton = (Button) findViewById(R.id.button9);
         final Button addwordButton = (Button) findViewById(R.id.button8);
         final Button clearButton = (Button) findViewById(R.id.button14);
+        final Button listButton = (Button) findViewById(R.id.button22);
         EditText editword = findViewById(R.id.editWord);
         EditText edittranslate = findViewById(R.id.editTranslate);
         dbHelper = new DBhelper(this);
@@ -67,7 +68,23 @@ public class AddText extends AppCompatActivity {
             //Log.d("mLog", "ID = " + m);
         });
         clearButton.setOnClickListener((v) -> {
-            database.delete(DBhelper.TABLE_CONTACTS, null, null);
+            //database.delete(DBhelper.TABLE_CONTACTS, null, null);
+            try {
+                Intent intent = new Intent(AddText.this, Confidence.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        listButton.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(AddText.this, List.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 }
