@@ -11,6 +11,8 @@ public class Table extends SQLiteOpenHelper {
     public static int k = 0;
     public static int right = 0;
     public static int fail = 0;
+    public static int rand1 = 0;
+    public static int rand2 = 0;
     public Table(Context context) {
         super(context, DATA_NAME, null, DATA_VERSION);
     }
