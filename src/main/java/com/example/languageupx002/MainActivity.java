@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         final Button test1 = (Button) findViewById(R.id.button);
         final Button test2 = (Button) findViewById(R.id.button3);
         final Button test = (Button) findViewById(R.id.button10);
+        final Button schooltest1 = (Button) findViewById(R.id.button5);
         db = new DBhelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
@@ -96,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
         test1.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainActivity.this, WordTransslate.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+        schooltest1.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(MainActivity.this, SchoolTransslate.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
