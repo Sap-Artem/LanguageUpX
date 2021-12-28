@@ -30,9 +30,9 @@ public class WordTransslate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wordtranslate);
-        final Button quitButton = (Button) findViewById(R.id.button15);
-        final Button nextButton = (Button) findViewById(R.id.button13);
-        final Button checkButton = (Button) findViewById(R.id.button11);
+        final Button quitButton = (Button) findViewById(R.id.button35);
+        final Button nextButton = (Button) findViewById(R.id.button33);
+        final Button checkButton = (Button) findViewById(R.id.button31);
         dbHelper = new DBhelper(this);
         DB = new DopDB(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
