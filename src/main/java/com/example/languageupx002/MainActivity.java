@@ -2,6 +2,8 @@ package com.example.languageupx002;
 
 import static com.example.languageupx002.Table.fail;
 import static com.example.languageupx002.Table.k;
+import static com.example.languageupx002.Table.rand1;
+import static com.example.languageupx002.Table.rand2;
 import static com.example.languageupx002.Table.right;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         fail = 0;
         final Button addButton = (Button) findViewById(R.id.button12);
         final Button list = (Button) findViewById(R.id.button2);
+        final Button couple = (Button) findViewById(R.id.button4);
         final Button test1 = (Button) findViewById(R.id.button);
+        final Button test2 = (Button) findViewById(R.id.button3);
         final Button test = (Button) findViewById(R.id.button10);
         db = new DBhelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
@@ -52,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
             Log.d("mLog","0 rows");
 
         cursor.close();
+        while (true){
+            do{
+                rand1 = (int)(Math.random()*(k)+1);
+            }while (rand1 == 1);
+            int t;
+            int b = rand1;
+            int a = k;
+            while(b != 0){
+                t = a;
+                a = b;
+                b = t%b;
+            }
+            if (a==1){
+                break;
+            }
+        }
+        rand2 = (int)(Math.random()*(k)+1);
         addButton.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainActivity.this, AddText.class);
@@ -82,9 +103,29 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        test2.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(MainActivity.this, TransslateWord.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
         test.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainActivity.this, Test.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+        couple.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(MainActivity.this, Couple.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
