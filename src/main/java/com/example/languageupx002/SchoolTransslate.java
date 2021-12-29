@@ -31,11 +31,11 @@ public class SchoolTransslate extends AppCompatActivity {
         setContentView(R.layout.schooltranslate);
         final Button quitButton = (Button) findViewById(R.id.button35);
         final Button nextButton = (Button) findViewById(R.id.button33);
-        final Button checkButton = (Button) findViewById(R.id.button31);
         final Button variant1 = (Button) findViewById(R.id.button23);
         final Button variant2 = (Button) findViewById(R.id.button26);
         final Button variant3 = (Button) findViewById(R.id.button30);
         final Button variant4 = (Button) findViewById(R.id.button29);
+        final Button variant5 = (Button) findViewById(R.id.button11);
         dbHelper = new DBhelper(this);
         DB = new DopDB(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -50,38 +50,75 @@ public class SchoolTransslate extends AppCompatActivity {
         if (rand2>k){
             rand2 = rand2 - k;
         }
-        AtomicInteger flag = new AtomicInteger();
         int idIndex = cursor.getColumnIndex(DBhelper.KEY_ID);
         int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
         textright.setText(Integer.toString(right));
         textfail.setText(Integer.toString(fail));
+        int rand3 = (int) (Math.random() * (5) + 1);
+        int rand4;
+        int rand5;
+        do {
+            rand4 = (int) (Math.random() * (k / 2 - 1) + 1);
+            rand5 = (int) (Math.random() * (k / 2 - 1) + 1);
+        }while(rand4 == rand5);
+        int v2 = rand2 + rand4;
+        if (v2>k) v2 = v2 - k;
+        int v3 = rand2 - rand4;
+        if (v3<1) v3 = v3 + k;
+        int v4 = rand2 + rand5;
+        if (v4>k) v4 = v4 - k;
+        int v5 = rand2 - rand5;
+        if (v5<1) v5 = v5 + k;
+        Log.d("mLog",rand3 + " " + rand4 + " " + rand5);
         if (cursor.moveToFirst()) {
             do {
                 if (rand2 == cursor.getInt(idIndex)) {
                     String a = cursor.getString(nameIndex);
                     textView.setText(a);
-                    int rand3 = (int) (Math.random() * (4) + 1);
-                    int rand4 = (int)(Math.random()*(k/2 - 1)+1);
                     String b = cursor.getString(emailIndex);
-                    switch (rand3) {
-                        case (1):
-                            variant1.setText(b);
-                            break;
-                        case (2):
-                            variant2.setText(b);
-                            break;
-                        case (3):
-                            variant3.setText(b);
-                            break;
-                        case (4):
-                            variant4.setText(b);
-                            break;
-                    }
+                    if(rand3 == 1) variant1.setText(b);
+                    if(rand3 == 2) variant2.setText(b);
+                    if(rand3 == 3) variant3.setText(b);
+                    if(rand3 == 4) variant4.setText(b);
+                    if(rand3 == 5) variant5.setText(b);
                 }
-            } while (cursor.moveToNext());
+                if (v2 == cursor.getInt(idIndex)) {
+                    String b = cursor.getString(emailIndex);
+                    if(rand3 == 1) variant2.setText(b);
+                    if(rand3 == 2) variant3.setText(b);
+                    if(rand3 == 3) variant4.setText(b);
+                    if(rand3 == 4) variant5.setText(b);
+                    if(rand3 == 5) variant1.setText(b);
+                }
+                if (v3 == cursor.getInt(idIndex)) {
+                    String b = cursor.getString(emailIndex);
+                    if(rand3 == 1) variant3.setText(b);
+                    if(rand3 == 2) variant4.setText(b);
+                    if(rand3 == 3) variant5.setText(b);
+                    if(rand3 == 4) variant1.setText(b);
+                    if(rand3 == 5) variant2.setText(b);
+                }
+                if (v4 == cursor.getInt(idIndex)) {
+                    String b = cursor.getString(emailIndex);
+                    if(rand3 == 1) variant4.setText(b);
+                    if(rand3 == 2) variant5.setText(b);
+                    if(rand3 == 3) variant1.setText(b);
+                    if(rand3 == 4) variant2.setText(b);
+                    if(rand3 == 5) variant3.setText(b);
+                }
+                if (v5 == cursor.getInt(idIndex)) {
+                    String b = cursor.getString(emailIndex);
+                    if(rand3 == 1) variant5.setText(b);
+                    if(rand3 == 2) variant1.setText(b);
+                    if(rand3 == 3) variant2.setText(b);
+                    if(rand3 == 4) variant3.setText(b);
+                    if(rand3 == 5) variant4.setText(b);
+                }
+            } while (cursor.moveToNext()) ;
         } else
             Log.d("mLog","0 rows");
+
         if (right + fail >= k){
             try {
                 Intent intent = new Intent(SchoolTransslate.this, Itog.class);
