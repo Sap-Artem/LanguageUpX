@@ -38,6 +38,7 @@ public class SchoolTransslate extends AppCompatActivity {
         final Button variant3 = (Button) findViewById(R.id.button30);
         final Button variant4 = (Button) findViewById(R.id.button29);
         final Button variant5 = (Button) findViewById(R.id.button11);
+        int rightold = right;
         dbHelper = new DBhelper(this);
         DB = new DopDB(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -219,14 +220,15 @@ public class SchoolTransslate extends AppCompatActivity {
 
         });
         nextButton.setOnClickListener((v) -> {
-            try {
-                Intent intent = new Intent(SchoolTransslate.this, SchoolTransslate.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(right > rightold){
+                try {
+                    Intent intent = new Intent(SchoolTransslate.this, SchoolTransslate.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-
         });
     }
 }
