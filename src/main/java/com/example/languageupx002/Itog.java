@@ -28,12 +28,12 @@ public class Itog extends AppCompatActivity {
         TextView mark = findViewById(R.id.textView18);
         rightanswer.setText(Integer.toString(right));
         failanswer.setText(Integer.toString(fail));
-        averageanswer1.setText(Integer.toString(right*5/k));
-        averageanswer2.setText(Integer.toString((right*500/k)%100));
-        if ((right*500/k)%100 >= 50){
-            mark.setText(Integer.toString(right*5/k + 1));
+        averageanswer1.setText(Integer.toString(right*5/(fail + right)));
+        averageanswer2.setText(Integer.toString((right*500/(fail + right))%100));
+        if ((right*500/(fail + right))%100 >= 50){
+            mark.setText(Integer.toString(right*5/(fail + right) + 1));
         }else{
-            mark.setText(Integer.toString(right*5/k));
+            mark.setText(Integer.toString(right*5/(fail + right)));
         }
         Button button = findViewById(R.id.button17);
         button.setOnClickListener((v) -> {
