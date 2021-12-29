@@ -1,5 +1,6 @@
 package com.example.languageupx002;
 
+import static com.example.languageupx002.Table.chet;
 import static com.example.languageupx002.Table.fail;
 import static com.example.languageupx002.Table.k;
 import static com.example.languageupx002.Table.rand1;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         k = 0;
         right = 0;
         fail = 0;
+        chet = 0;
         final Button addButton = (Button) findViewById(R.id.button12);
         final Button list = (Button) findViewById(R.id.button2);
         final Button couple = (Button) findViewById(R.id.button4);
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         final Button test2 = (Button) findViewById(R.id.button3);
         final Button test = (Button) findViewById(R.id.button10);
         final Button schooltest1 = (Button) findViewById(R.id.button5);
+        final Button schooltest2 = (Button) findViewById(R.id.button7);
         db = new DBhelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
@@ -107,6 +110,16 @@ public class MainActivity extends AppCompatActivity {
         schooltest1.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainActivity.this, SchoolTransslate.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+        schooltest2.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(MainActivity.this, SchoolWord.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {

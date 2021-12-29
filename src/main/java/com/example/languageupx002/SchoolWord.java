@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SchoolTransslate extends AppCompatActivity {
+public class SchoolWord extends AppCompatActivity {
     DBhelper dbHelper;
     DopDB DB;
     String m;
@@ -30,7 +30,7 @@ public class SchoolTransslate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.schooltranslate);
+        setContentView(R.layout.schoolword);
         final Button quitButton = (Button) findViewById(R.id.button35);
         final Button nextButton = (Button) findViewById(R.id.button33);
         final Button variant1 = (Button) findViewById(R.id.button23);
@@ -76,9 +76,9 @@ public class SchoolTransslate extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             do {
                 if (rand2 == cursor.getInt(idIndex)) {
-                    String a = cursor.getString(nameIndex);
+                    String a = cursor.getString(emailIndex);
                     textView.setText(a);
-                    String b = cursor.getString(emailIndex);
+                    String b = cursor.getString(nameIndex);
                     if(rand3 == 1) variant1.setText(b);
                     if(rand3 == 2) variant2.setText(b);
                     if(rand3 == 3) variant3.setText(b);
@@ -86,7 +86,7 @@ public class SchoolTransslate extends AppCompatActivity {
                     if(rand3 == 5) variant5.setText(b);
                 }
                 if (v2 == cursor.getInt(idIndex)) {
-                    String b = cursor.getString(emailIndex);
+                    String b = cursor.getString(nameIndex);
                     if(rand3 == 1) variant2.setText(b);
                     if(rand3 == 2) variant3.setText(b);
                     if(rand3 == 3) variant4.setText(b);
@@ -94,7 +94,7 @@ public class SchoolTransslate extends AppCompatActivity {
                     if(rand3 == 5) variant1.setText(b);
                 }
                 if (v3 == cursor.getInt(idIndex)) {
-                    String b = cursor.getString(emailIndex);
+                    String b = cursor.getString(nameIndex);
                     if(rand3 == 1) variant3.setText(b);
                     if(rand3 == 2) variant4.setText(b);
                     if(rand3 == 3) variant5.setText(b);
@@ -102,7 +102,7 @@ public class SchoolTransslate extends AppCompatActivity {
                     if(rand3 == 5) variant2.setText(b);
                 }
                 if (v4 == cursor.getInt(idIndex)) {
-                    String b = cursor.getString(emailIndex);
+                    String b = cursor.getString(nameIndex);
                     if(rand3 == 1) variant4.setText(b);
                     if(rand3 == 2) variant5.setText(b);
                     if(rand3 == 3) variant1.setText(b);
@@ -110,7 +110,7 @@ public class SchoolTransslate extends AppCompatActivity {
                     if(rand3 == 5) variant3.setText(b);
                 }
                 if (v5 == cursor.getInt(idIndex)) {
-                    String b = cursor.getString(emailIndex);
+                    String b = cursor.getString(nameIndex);
                     if(rand3 == 1) variant5.setText(b);
                     if(rand3 == 2) variant1.setText(b);
                     if(rand3 == 3) variant2.setText(b);
@@ -200,7 +200,7 @@ public class SchoolTransslate extends AppCompatActivity {
         });
         if (chet > k){
             try {
-                Intent intent = new Intent(SchoolTransslate.this, Itog.class);
+                Intent intent = new Intent(SchoolWord.this, Itog.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -210,7 +210,7 @@ public class SchoolTransslate extends AppCompatActivity {
         database2.insert(DopDB.TABLE_CONTACTS2, null, contentValues);
         quitButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(SchoolTransslate.this, MainActivity.class);
+                Intent intent = new Intent(SchoolWord.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -220,7 +220,7 @@ public class SchoolTransslate extends AppCompatActivity {
         });
         nextButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(SchoolTransslate.this, SchoolTransslate.class);
+                Intent intent = new Intent(SchoolWord.this, SchoolWord.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
