@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         final Button test = (Button) findViewById(R.id.button10);
         final Button schooltest1 = (Button) findViewById(R.id.button5);
         final Button schooltest2 = (Button) findViewById(R.id.button7);
+        final Button auditest1 = (Button) findViewById(R.id.button6);
         db = new DBhelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
@@ -157,6 +158,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        auditest1.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(MainActivity.this, AudiTransslate.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+        });
     }
 }

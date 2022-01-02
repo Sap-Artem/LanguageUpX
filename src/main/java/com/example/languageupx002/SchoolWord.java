@@ -217,7 +217,6 @@ public class SchoolWord extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         });
         nextButton.setOnClickListener((v) -> {
             if(right > rightold) {
