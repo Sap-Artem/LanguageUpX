@@ -1,6 +1,7 @@
 package com.example.languageupx002;
 
 import static com.example.languageupx002.Table.chet;
+import static com.example.languageupx002.Table.flag;
 import static com.example.languageupx002.Table.k;
 import static com.example.languageupx002.Table.rand1;
 import static com.example.languageupx002.Table.rand2;
@@ -30,6 +31,7 @@ public class Check extends AppCompatActivity {
         final Button quitButton = (Button) findViewById(R.id.button35);
         LinearLayout llMainNumber = (LinearLayout) findViewById(R.id.llMainNumber);
         LinearLayout llMainWord = (LinearLayout) findViewById(R.id.llMainWord);
+        chet = 0;
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Cursor cursor = database.query(DBhelper.TABLE_CONTACTS, null, null, null, null, null, null);
@@ -39,16 +41,18 @@ public class Check extends AppCompatActivity {
         int idIndex = cursor.getColumnIndex(DBhelper.KEY_ID);
         int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
-        rand2 = rand2 + rand1;
-        if (rand2>k){
-            rand2 = rand2 - k;
-        }
+        String a = null;
         while(chet<k) {
             if (cursor.moveToFirst()) {
                 do {
                     if (rand2 == cursor.getInt(idIndex)) {
                         chet = chet + 1;
-                        String a = cursor.getString(emailIndex);
+                        if (flag == 1) {
+                            a = cursor.getString(emailIndex);
+                        }
+                        if (flag == 2) {
+                            a = cursor.getString(nameIndex);
+                        }
                         TextView wordText = new TextView(this);
                         wordText.setText(a);
                         llMainWord.addView(wordText, lParams);

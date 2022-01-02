@@ -5,7 +5,6 @@ import static com.example.languageupx002.Table.flag;
 import static com.example.languageupx002.Table.k;
 import static com.example.languageupx002.Table.rand1;
 import static com.example.languageupx002.Table.rand2;
-import static com.example.languageupx002.Table.right;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -15,13 +14,12 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
-public class AudiTransslate extends AppCompatActivity implements
+public class AudiWord extends AppCompatActivity implements
             TextToSpeech.OnInitListener{
     DBhelper  dbHelper;
     private TextToSpeech tts;
@@ -49,13 +47,13 @@ public class AudiTransslate extends AppCompatActivity implements
         if (cursor.moveToFirst()) {
             do {
                 if (rand2 == cursor.getInt(idIndex)) {
-                    a = cursor.getString(nameIndex);
+                    a = cursor.getString(emailIndex);
                     speakOut();
                     if (chet > k){
                         chet = 0;
-                        flag = 1;
+                        flag = 2;
                         try {
-                            Intent intent = new Intent(AudiTransslate.this, Check.class);
+                            Intent intent = new Intent(AudiWord.this, Check.class);
                             startActivity(intent);
                             finish();
                         } catch (Exception e) {
@@ -67,7 +65,7 @@ public class AudiTransslate extends AppCompatActivity implements
         }
         nextButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(AudiTransslate.this, AudiTransslate.class);
+                Intent intent = new Intent(AudiWord.this, AudiWord.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -77,7 +75,7 @@ public class AudiTransslate extends AppCompatActivity implements
         });
         quitButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(AudiTransslate.this, MainActivity.class);
+                Intent intent = new Intent(AudiWord.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -102,8 +100,9 @@ public class AudiTransslate extends AppCompatActivity implements
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-
-            int result = tts.setLanguage(Locale.US);
+            Locale localDef = Locale.getDefault();
+            Locale locale = new Locale("ru");
+            int result = tts.setLanguage(new Locale(Locale.getDefault().getLanguage()));
 
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
