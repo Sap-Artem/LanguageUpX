@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     DBhelper  db;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         rand2 = (int)(Math.random()*(k)+1);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Add at least 6 words to the database", Toast.LENGTH_SHORT);
         addButton.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainActivity.this, AddText.class);
@@ -109,22 +112,30 @@ public class MainActivity extends AppCompatActivity {
 
         });
         schooltest1.setOnClickListener((v) -> {
-            try {
-                Intent intent = new Intent(MainActivity.this, SchoolTransslate.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(k>=6) {
+                try {
+                    Intent intent = new Intent(MainActivity.this, SchoolTransslate.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                toast.show();
             }
 
         });
         schooltest2.setOnClickListener((v) -> {
-            try {
-                Intent intent = new Intent(MainActivity.this, SchoolWord.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(k>=6) {
+                try {
+                    Intent intent = new Intent(MainActivity.this, SchoolWord.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                toast.show();
             }
 
         });

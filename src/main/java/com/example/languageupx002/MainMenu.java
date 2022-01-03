@@ -6,28 +6,47 @@ import static com.example.languageupx002.Table.k;
 import static com.example.languageupx002.Table.rand1;
 import static com.example.languageupx002.Table.rand2;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenu extends AppCompatActivity {
-    DBhelper  dbHelper;
-    int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
+    DBhelper  db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        k = 0;
+        db = new DBhelper(this);
+        SQLiteDatabase database = db.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        database.insert(DBhelper.TABLE_CONTACTS, null, contentValues);
+        Cursor cursor = database.query(DBhelper.TABLE_CONTACTS, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                k = k + 1;
+            } while (cursor.moveToNext());
+        } else
+            Log.d("mLog","0 rows");
+        cursor.close();
         final Button testButton = (Button) findViewById(R.id.button13);
         final Button addButton = (Button) findViewById(R.id.button15);
         final Button listButton = (Button) findViewById(R.id.button25);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Add at least 3 words to the database", Toast.LENGTH_SHORT);
         listButton.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(MainMenu.this, List.class);
@@ -49,12 +68,16 @@ public class MainMenu extends AppCompatActivity {
 
         });
         testButton.setOnClickListener((v) -> {
-            try {
-                Intent intent = new Intent(MainMenu.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(k>=3) {
+                try {
+                    Intent intent = new Intent(MainMenu.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                toast.show();
             }
 
         });
