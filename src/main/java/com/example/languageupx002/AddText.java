@@ -27,15 +27,15 @@ public class AddText extends AppCompatActivity {
         final Button quitButton = (Button) findViewById(R.id.button9);
         final Button addwordButton = (Button) findViewById(R.id.button8);
         final Button clearButton = (Button) findViewById(R.id.button14);
+        final Button listButton = (Button) findViewById(R.id.button22);
         EditText editword = findViewById(R.id.editWord);
         EditText edittranslate = findViewById(R.id.editTranslate);
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         quitButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(AddText.this, MainActivity.class);
+                Intent intent = new Intent(AddText.this, MainMenu.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -53,6 +53,13 @@ public class AddText extends AppCompatActivity {
 
             database.insert(DBhelper.TABLE_CONTACTS, null, contentValues);
             Cursor cursor = database.query(DBhelper.TABLE_CONTACTS, null, null, null, null, null, null);
+            try {
+                Intent intent = new Intent(AddText.this, AddText.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (cursor.moveToFirst()) {
                 int idIndex = cursor.getColumnIndex(DBhelper.KEY_ID);
                 int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
@@ -68,7 +75,23 @@ public class AddText extends AppCompatActivity {
             //Log.d("mLog", "ID = " + m);
         });
         clearButton.setOnClickListener((v) -> {
-            database.delete(DBhelper.TABLE_CONTACTS, null, null);
+            //database.delete(DBhelper.TABLE_CONTACTS, null, null);
+            try {
+                Intent intent = new Intent(AddText.this, Confidence.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        listButton.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(AddText.this, List.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 }

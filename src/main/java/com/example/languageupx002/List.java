@@ -50,7 +50,7 @@ public class List extends AppCompatActivity {
             Log.d("mLog","0 rows");
         quitButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(List.this, MainActivity.class);
+                Intent intent = new Intent(List.this, MainMenu.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
