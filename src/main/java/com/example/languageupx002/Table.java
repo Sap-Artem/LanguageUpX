@@ -17,6 +17,7 @@ public class Table extends SQLiteOpenHelper {
     public static int win = 0;
     public static int chet = 0;
     public static int flag = 0;
+    public static int reserve_id = 0;
     public Table(Context context) {
         super(context, DATA_NAME, null, DATA_VERSION);
     }
