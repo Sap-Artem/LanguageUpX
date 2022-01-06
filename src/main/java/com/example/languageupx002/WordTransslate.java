@@ -37,7 +37,7 @@ public class WordTransslate extends AppCompatActivity {
         DB = new DopDB(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         SQLiteDatabase database2 = DB.getWritableDatabase();
-        EditText edittranslate = findViewById(R.id.editWord2);
+        EditText edittranslate = findViewById(R.id.editWord);
         TextView textView = findViewById(R.id.textView6);
         TextView textView2 = findViewById(R.id.textView7);
         TextView textright = findViewById(R.id.textView4);
