@@ -58,7 +58,7 @@ public class Cards extends AppCompatActivity {
                     deleteButton.setOnClickListener((v) -> {
                         database.delete(DBhelper.TABLE_CONTACTS, DBhelper.KEY_ID + "=" + reserve_id, null);
                         try {
-                            Intent intent = new Intent(Cards.this, List.class);
+                            Intent intent = new Intent(Cards.this, Amendment.class);
                             startActivity(intent);
                             finish();
                         } catch (Exception e) {
