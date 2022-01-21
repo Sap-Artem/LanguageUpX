@@ -1,19 +1,14 @@
 package com.example.languageupx002;
 
 
-import static com.example.languageupx002.Table.k;
-
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,18 +19,17 @@ public class AddText extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plus);
-        final Button quitButton = (Button) findViewById(R.id.button9);
-        final Button addwordButton = (Button) findViewById(R.id.button8);
-        final Button clearButton = (Button) findViewById(R.id.button14);
+        final ImageButton quitButton = (ImageButton) findViewById(R.id.button9);
+        final ImageButton addwordButton = (ImageButton) findViewById(R.id.button8);
+        final ImageButton listButton = (ImageButton) findViewById(R.id.button22);
         EditText editword = findViewById(R.id.editWord);
         EditText edittranslate = findViewById(R.id.editTranslate);
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         quitButton.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(AddText.this, MainActivity.class);
+                Intent intent = new Intent(AddText.this, MainMenu.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
@@ -53,6 +47,13 @@ public class AddText extends AppCompatActivity {
 
             database.insert(DBhelper.TABLE_CONTACTS, null, contentValues);
             Cursor cursor = database.query(DBhelper.TABLE_CONTACTS, null, null, null, null, null, null);
+            try {
+                Intent intent = new Intent(AddText.this, AddText.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (cursor.moveToFirst()) {
                 int idIndex = cursor.getColumnIndex(DBhelper.KEY_ID);
                 int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
@@ -67,8 +68,14 @@ public class AddText extends AppCompatActivity {
             cursor.close();
             //Log.d("mLog", "ID = " + m);
         });
-        clearButton.setOnClickListener((v) -> {
-            database.delete(DBhelper.TABLE_CONTACTS, null, null);
+        listButton.setOnClickListener((v) -> {
+            try {
+                Intent intent = new Intent(AddText.this, List.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 }
