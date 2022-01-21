@@ -40,7 +40,7 @@ public class Test extends AppCompatActivity {
         cursor.close();
         back.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(Test.this, MainActivity.class);
+                Intent intent = new Intent(Test.this, MainMenu.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
