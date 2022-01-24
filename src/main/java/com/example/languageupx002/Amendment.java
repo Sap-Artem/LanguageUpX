@@ -20,7 +20,6 @@ public class Amendment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.plus);
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Cursor cursor = database.query(DBhelper.TABLE_CONTACTS, null, null, null, null, null, null);

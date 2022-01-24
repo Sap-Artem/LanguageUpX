@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -22,16 +23,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Locale;
 
 public class AudiTransslate extends AppCompatActivity implements
-            TextToSpeech.OnInitListener{
+        TextToSpeech.OnInitListener{
     DBhelper  dbHelper;
     private TextToSpeech tts;
     private String a;
+    private TextView mTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auditransslate);
-        final ImageButton nextButton = (ImageButton) findViewById(R.id.button33);
         final ImageButton quitButton = (ImageButton) findViewById(R.id.button35);
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -46,6 +47,21 @@ public class AudiTransslate extends AppCompatActivity implements
         int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
         tts = new TextToSpeech(this, this);
+        mTimer = (TextView)findViewById(R.id.tv);
+        final CountDownTimer timer = new CountDownTimer(5000, 1) {
+            public void onTick(long millisUntilFinished) {
+                mTimer.setText(millisUntilFinished + "ms");
+            }
+            public void onFinish() {
+                try {
+                    Intent intent = new Intent(AudiTransslate.this, AudiTransslate.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
         if (cursor.moveToFirst()) {
             do {
                 if (rand2 == cursor.getInt(idIndex)) {
@@ -54,6 +70,7 @@ public class AudiTransslate extends AppCompatActivity implements
                     if (chet > k){
                         chet = 0;
                         flag = 1;
+                        timer.cancel();
                         try {
                             Intent intent = new Intent(AudiTransslate.this, Check.class);
                             startActivity(intent);
@@ -65,17 +82,8 @@ public class AudiTransslate extends AppCompatActivity implements
                 }
             }while (cursor.moveToNext());
         }
-        nextButton.setOnClickListener((v) -> {
-            try {
-                Intent intent = new Intent(AudiTransslate.this, AudiTransslate.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        });
         quitButton.setOnClickListener((v) -> {
+            timer.cancel();
             try {
                 Intent intent = new Intent(AudiTransslate.this, MainActivity.class);
                 startActivity(intent);

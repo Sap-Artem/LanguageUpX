@@ -11,10 +11,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,7 @@ public class AudiWord extends AppCompatActivity implements
     DBhelper  dbHelper;
     private TextToSpeech tts;
     private String a;
+    private TextView mTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,21 @@ public class AudiWord extends AppCompatActivity implements
         int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
         tts = new TextToSpeech(this, this);
+        mTimer = (TextView)findViewById(R.id.tv);
+        final CountDownTimer timer = new CountDownTimer(5000, 1) {
+            public void onTick(long millisUntilFinished) {
+                mTimer.setText(millisUntilFinished + "ms");
+            }
+            public void onFinish() {
+                try {
+                    Intent intent = new Intent(AudiWord.this, AudiWord.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
         if (cursor.moveToFirst()) {
             do {
                 if (rand2 == cursor.getInt(idIndex)) {
@@ -53,6 +71,7 @@ public class AudiWord extends AppCompatActivity implements
                     if (chet > k){
                         chet = 0;
                         flag = 2;
+                        timer.cancel();
                         try {
                             Intent intent = new Intent(AudiWord.this, Check.class);
                             startActivity(intent);
@@ -64,17 +83,8 @@ public class AudiWord extends AppCompatActivity implements
                 }
             }while (cursor.moveToNext());
         }
-        nextButton.setOnClickListener((v) -> {
-            try {
-                Intent intent = new Intent(AudiWord.this, AudiWord.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        });
         quitButton.setOnClickListener((v) -> {
+            timer.cancel();
             try {
                 Intent intent = new Intent(AudiWord.this, MainActivity.class);
                 startActivity(intent);
