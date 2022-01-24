@@ -12,6 +12,13 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+
 public class AddText extends AppCompatActivity {
     DBhelper dbHelper;
 
@@ -19,14 +26,17 @@ public class AddText extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plus);
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         final ImageButton quitButton = (ImageButton) findViewById(R.id.button9);
         final ImageButton addwordButton = (ImageButton) findViewById(R.id.button8);
-        final ImageButton listButton = (ImageButton) findViewById(R.id.button22);
         EditText editword = findViewById(R.id.editWord);
         EditText edittranslate = findViewById(R.id.editTranslate);
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         quitButton.setOnClickListener((v) -> {
             try {
                 Intent intent = new Intent(AddText.this, MainMenu.class);
@@ -67,15 +77,6 @@ public class AddText extends AppCompatActivity {
                 Log.d("mLog","0 rows");
             cursor.close();
             //Log.d("mLog", "ID = " + m);
-        });
-        listButton.setOnClickListener((v) -> {
-            try {
-                Intent intent = new Intent(AddText.this, List.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         });
     }
 }
