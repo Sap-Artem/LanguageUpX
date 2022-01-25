@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ public class Test extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
-        final Button back = (Button) findViewById(R.id.button16);
+        final ImageButton back = (ImageButton) findViewById(R.id.imageButton);
         db = new DopDB(this);
         ContentValues contentValues = new ContentValues();
         SQLiteDatabase database = db.getWritableDatabase();
@@ -40,7 +41,7 @@ public class Test extends AppCompatActivity {
         cursor.close();
         back.setOnClickListener((v) -> {
             try {
-                Intent intent = new Intent(Test.this, MainActivity.class);
+                Intent intent = new Intent(Test.this, MainMenu.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
