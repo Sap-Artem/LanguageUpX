@@ -50,43 +50,67 @@ public class MainMenu extends AppCompatActivity {
         final ImageButton listButton = (ImageButton) findViewById(R.id.button25);
         final ImageButton nastButton = (ImageButton) findViewById(R.id.imageButton3);
         Toast toast = Toast.makeText(getApplicationContext(),
-                "Add at least 3 words to the database", Toast.LENGTH_SHORT);
+                "", Toast.LENGTH_SHORT);
         switch (lang){
             case (1):
                 testButton.setText("Start Tests");
+                toast = Toast.makeText(getApplicationContext(),
+                        "Add at least 3 words to the database", Toast.LENGTH_SHORT);
                 break;
             case (2):
                 testButton.setText("Commencer les tests");
+                toast = Toast.makeText(getApplicationContext(),
+                        "Ajouter au moins 3 mots à la base de données", Toast.LENGTH_SHORT);
                 break;
             case (3):
                 testButton.setText("Iniciar pruebas");
+                toast = Toast.makeText(getApplicationContext(),
+                        "Agregue al menos 3 palabras a la base de datos", Toast.LENGTH_SHORT);
                 break;
             case (4):
                 testButton.setText("Iniciar testes");
+                toast = Toast.makeText(getApplicationContext(),
+                        "Adicione pelo menos 3 palavras ao banco de dados", Toast.LENGTH_SHORT);
                 break;
             case (5):
                 testButton.setText("Avviare i test");
+                toast = Toast.makeText(getApplicationContext(),
+                        "Aggiungi almeno 3 parole al database", Toast.LENGTH_SHORT);
                 break;
             case (6):
                 testButton.setText("Tests starten");
+                toast = Toast.makeText(getApplicationContext(),
+                        "Fügen Sie der Datenbank mindestens 3 Wörter hinzu", Toast.LENGTH_SHORT);
                 break;
             case (7):
                 testButton.setText("Начать тесты");
+                toast = Toast.makeText(getApplicationContext(),
+                        "Добавьте хотя бы 3 слова, чтобы открыть тесты", Toast.LENGTH_SHORT);
                 break;
             case (8):
                 testButton.setText("开始测试");
+                toast = Toast.makeText(getApplicationContext(),
+                        "將至少 3 個單詞添加到數據庫中", Toast.LENGTH_SHORT);
                 break;
             case (9):
                 testButton.setText("테스트 시작");
+                toast = Toast.makeText(getApplicationContext(),
+                        "데이터베이스에 최소 3단어 추가", Toast.LENGTH_SHORT);
                 break;
             case (10):
                 testButton.setText("テスト開始");
+                toast = Toast.makeText(getApplicationContext(),
+                        "データベースに少なくとも3つの単語を追加します", Toast.LENGTH_SHORT);
                 break;
             case (11):
                 testButton.setText("परीक्षण शुरू करें");
+                toast = Toast.makeText(getApplicationContext(),
+                        "डेटाबेस में कम से कम 3 शब्द जोड़ें", Toast.LENGTH_SHORT);
                 break;
             case (12):
                 testButton.setText("بدء الاختبارات");
+                toast = Toast.makeText(getApplicationContext(),
+                        "أضف 3 كلمات على الأقل إلى قاعدة البيانات", Toast.LENGTH_SHORT);
                 break;
         }
         nastButton.setOnClickListener((v) -> {
@@ -119,6 +143,7 @@ public class MainMenu extends AppCompatActivity {
             }
 
         });
+        Toast finalToast = toast;
         testButton.setOnClickListener((v) -> {
             if(k>=3) {
                 try {
@@ -129,7 +154,7 @@ public class MainMenu extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }else{
-                toast.show();
+                finalToast.show();
             }
 
         });

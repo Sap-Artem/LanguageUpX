@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -129,10 +130,11 @@ public class Couple extends AppCompatActivity {
                                 if (ch.intValue() % 2 == 0) {
                                     if (conserve - rightword == k) {
                                         wordButton.setBackgroundColor(Color.parseColor("#00FF00"));
-                                        wordButton.setClickable(false);
+                                        wordButton.setVisibility(View.GONE);
                                         @SuppressLint("ResourceType") final Button conserveButton;
                                         conserveButton = (Button) findViewById(conserve);
                                         conserveButton.setBackgroundColor(Color.parseColor("#00FF00"));
+                                        conserveButton.setVisibility(View.GONE);
                                         win = win + 1;
                                         wordButton.setId(0);
                                         conserveButton.setId(0);
@@ -195,10 +197,11 @@ public class Couple extends AppCompatActivity {
                                 if (ch.intValue() % 2 == 0) {
                                     if (righttranslate - conserve == k) {
                                         translateButton.setBackgroundColor(Color.parseColor("#00ff00"));
-                                        translateButton.setClickable(false);
+                                        translateButton.setVisibility(View.GONE);
                                         @SuppressLint("ResourceType") final Button conserveButton;
                                         conserveButton = (Button) findViewById(conserve);
                                         conserveButton.setBackgroundColor(Color.parseColor("#00ff00"));
+                                        conserveButton.setVisibility(View.GONE);
                                         win = win + 1;
                                         translateButton.setId(0);
                                         conserveButton.setId(0);
