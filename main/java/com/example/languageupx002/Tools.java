@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.languageupx002.Table.fail;
 import static com.example.languageupx002.Table.lang;
@@ -265,13 +266,19 @@ public class Tools extends AppCompatActivity {
 
         });
         back.setOnClickListener((v) -> {
-            pr = (Integer.parseInt(String.valueOf(editTime.getText())));
-            try {
-                Intent intent = new Intent(Tools.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
+            try{
+                pr = (Integer.parseInt(String.valueOf(editTime.getText())));
+                try {
+                    Intent intent = new Intent(Tools.this, MainMenu.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }catch (Exception e){
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Write numbers", Toast.LENGTH_SHORT);
+                toast.show();
             }
 
         });
