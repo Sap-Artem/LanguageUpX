@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -140,6 +141,7 @@ public class TransslateWord extends AppCompatActivity {
                         String c = null;
                         String translate = edittranslate.getText().toString();
                         contentValues.put(DopDB.ANSWER, translate);
+                        checkButton.setVisibility(View.GONE);
                         if(b.equals(translate)){
                             switch(lang){
                                 case(1):
@@ -202,7 +204,7 @@ public class TransslateWord extends AppCompatActivity {
                                     c = "Nein es ist " + b;
                                     break;
                                 case(7):
-                                    c = "Нет это" + b;
+                                    c = "Нет это " + b;
                                     break;
                                 case(8):
                                     c = "不，它是 " + b;
