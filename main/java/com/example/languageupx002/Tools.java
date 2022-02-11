@@ -255,13 +255,19 @@ public class Tools extends AppCompatActivity {
                 break;
         }
         home.setOnClickListener((v) -> {
-            pr = (Integer.parseInt(String.valueOf(editTime.getText())));
-            try {
-                Intent intent = new Intent(Tools.this, MainMenu.class);
-                startActivity(intent);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
+            try{
+                pr = (Integer.parseInt(String.valueOf(editTime.getText())));
+                try {
+                    Intent intent = new Intent(Tools.this, MainMenu.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }catch (Exception e){
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Write numbers", Toast.LENGTH_SHORT);
+                toast.show();
             }
 
         });
@@ -269,7 +275,7 @@ public class Tools extends AppCompatActivity {
             try{
                 pr = (Integer.parseInt(String.valueOf(editTime.getText())));
                 try {
-                    Intent intent = new Intent(Tools.this, MainMenu.class);
+                    Intent intent = new Intent(Tools.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception e) {

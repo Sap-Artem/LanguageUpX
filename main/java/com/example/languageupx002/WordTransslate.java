@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -144,6 +145,7 @@ public class WordTransslate extends AppCompatActivity {
                             String c = null;
                             String translate = edittranslate.getText().toString();
                             contentValues.put(DopDB.ANSWER, translate);
+                            checkButton.setVisibility(View.GONE);
                             if(b.equals(translate)){
                                 switch(lang){
                                     case(1):

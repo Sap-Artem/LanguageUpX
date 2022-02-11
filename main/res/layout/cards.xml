@@ -49,35 +49,35 @@
         android:layout_width="100dp"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/save"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/adView5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTranslate"
         app:rippleColor="#4CAF50" />
 
     <ImageButton
         android:id="@+id/button34"
         android:layout_width="72dp"
         android:layout_height="64dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/delete"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTranslate" />
+        app:layout_constraintBottom_toTopOf="@+id/adView5"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/button36"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/house2"
         android:text="QUIT"
         android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/adView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTranslate" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/button37"
@@ -98,6 +98,15 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="32dp" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
