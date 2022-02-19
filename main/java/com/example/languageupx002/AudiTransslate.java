@@ -8,7 +8,8 @@ import static com.example.languageupx002.Table.langtr;
 import static com.example.languageupx002.Table.pr;
 import static com.example.languageupx002.Table.rand1;
 import static com.example.languageupx002.Table.rand2;
-import static com.example.languageupx002.Table.right;
+import static com.example.languageupx002.Table.s;
+import static com.example.languageupx002.Table.flag2;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -37,8 +39,10 @@ public class AudiTransslate extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auditransslate);
         this.getSupportActionBar().hide();
+        flag2 = 0;
         final ImageButton quitButton = (ImageButton) findViewById(R.id.button35);
         final ImageButton toolsButton = (ImageButton) findViewById(R.id.imageButton4);
+        final ImageButton saveButton = (ImageButton) findViewById(R.id.imageButton6);
         dbHelper = new DBhelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Cursor cursor = database.query(DBhelper.TABLE_CONTACTS, null, null, null, null, null, null);
@@ -53,6 +57,7 @@ public class AudiTransslate extends AppCompatActivity implements
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
         TextView tv = (TextView)findViewById(R.id.textView6);
         TextView tvd = (TextView)findViewById(R.id.textView33);
+        EditText ed = (EditText)findViewById(R.id.editWord4);
         switch (lang){
             case (1):
                 tv.setText("*Write translate*");
@@ -124,10 +129,12 @@ public class AudiTransslate extends AppCompatActivity implements
                 if (rand2 == cursor.getInt(idIndex)) {
                     a = cursor.getString(nameIndex);
                     speakOut();
+                    Log.d("mLog", "_____" + a + "_____");
                     if (chet > k){
                         chet = 0;
                         flag = 1;
                         timer.cancel();
+                        Log.d("mLog", "_____" + s + "_____");
                         try {
                             Intent intent = new Intent(AudiTransslate.this, Check.class);
                             startActivity(intent);
@@ -154,6 +161,18 @@ public class AudiTransslate extends AppCompatActivity implements
             timer.cancel();
             try {
                 Intent intent = new Intent(AudiTransslate.this, Tools.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+        saveButton.setOnClickListener((v) -> {
+            timer.cancel();
+            s = s + ed.getText() + "!";
+            try {
+                Intent intent = new Intent(AudiTransslate.this, AudiTransslate.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {

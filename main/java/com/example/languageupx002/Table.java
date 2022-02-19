@@ -3,6 +3,7 @@ package com.example.languageupx002;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.media.MediaPlayer;
 
 public class Table extends SQLiteOpenHelper {
     public static final int DATA_VERSION = 1;
@@ -18,10 +19,12 @@ public class Table extends SQLiteOpenHelper {
     public static int chet = 0;
     public static int flag = 0;
     public static int reserve_id = 0;
-    public static int pr = 5;
+    public static int pr = 10;
     public static int langw = 1;
     public static int langtr = 1;
     public static int lang = 1;
+    public static int flag2 = 0;
+    public static String s = "";
     public Table(Context context) {
         super(context, DATA_NAME, null, DATA_VERSION);
     }
