@@ -2,15 +2,19 @@ package com.example.languageupx002;
 
 import static com.example.languageupx002.Table.chet;
 import static com.example.languageupx002.Table.flag;
+import static com.example.languageupx002.Table.flag2;
 import static com.example.languageupx002.Table.k;
 import static com.example.languageupx002.Table.lang;
 import static com.example.languageupx002.Table.rand1;
 import static com.example.languageupx002.Table.rand2;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,11 +28,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenu extends AppCompatActivity {
     DBhelper  db;
-
+    MediaPlayer mPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        SharedPreferences sp = getSharedPreferences("hasVisited",
+                Context.MODE_PRIVATE);
+        mPlayer = MediaPlayer.create(this, R.raw.music);
+        if(flag2==0) {
+            mPlayer.start();
+            flag2 = 1;
+        }
         this.getSupportActionBar().hide();
         k = 0;
         db = new DBhelper(this);

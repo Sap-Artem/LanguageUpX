@@ -6,11 +6,13 @@ import static com.example.languageupx002.Table.k;
 import static com.example.languageupx002.Table.lang;
 import static com.example.languageupx002.Table.rand1;
 import static com.example.languageupx002.Table.rand2;
+import static com.example.languageupx002.Table.s;
 
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
@@ -32,8 +34,8 @@ public class Check extends AppCompatActivity {
         setContentView(R.layout.check);
         this.getSupportActionBar().hide();
         final ImageButton quitButton = (ImageButton) findViewById(R.id.button35);
-        LinearLayout llMainNumber = (LinearLayout) findViewById(R.id.llMainNumber);
-        LinearLayout llMainWord = (LinearLayout) findViewById(R.id.llMainWord);
+        LinearLayout llMainWord = (LinearLayout) findViewById(R.id.llMainWord2);
+        LinearLayout llMainWord2 = (LinearLayout) findViewById(R.id.llMainWord);
         TextView tv = (TextView)findViewById(R.id.textView6);
         chet = 0;
         dbHelper = new DBhelper(this);
@@ -46,6 +48,7 @@ public class Check extends AppCompatActivity {
         int nameIndex = cursor.getColumnIndex(DBhelper.KEY_WORD);
         int emailIndex = cursor.getColumnIndex(DBhelper.KEY_TRANSLATE);
         String a = null;
+        String s1;
         switch (lang){
             case(1):
                 tv.setText("Check your answer");
@@ -88,6 +91,10 @@ public class Check extends AppCompatActivity {
             if (cursor.moveToFirst()) {
                 do {
                     if (rand2 == cursor.getInt(idIndex)) {
+                        if(s.contains("!"))
+                            s1 = s.substring(0,s.indexOf("!"));
+                        else
+                            break;
                         chet = chet + 1;
                         if (flag == 1) {
                             a = cursor.getString(emailIndex);
@@ -98,10 +105,21 @@ public class Check extends AppCompatActivity {
                         TextView wordText = new TextView(this);
                         wordText.setText(a);
                         llMainWord.addView(wordText, lParams);
+                        TextView wordText2 = new TextView(this);
+                        wordText2.setText(s1);
+                        if(s1.equals(a)) {
+                            wordText.setTextColor(Color.GREEN);
+                            wordText2.setTextColor(Color.GREEN);
+                        }
+                        else {
+                            wordText.setTextColor(Color.RED);
+                            wordText2.setTextColor(Color.RED);
+                        }
+                        s = s.substring(s.indexOf("!") + 1,s.length());
+                        llMainWord2.addView(wordText2, lParams);
                         String number = String.valueOf(chet);
                         TextView numberText = new TextView(this);
                         numberText.setText(number);
-                        llMainNumber.addView(numberText, lParams);
                         rand2 = rand2 + rand1;
                         if (rand2>k){
                             rand2 = rand2 - k;
