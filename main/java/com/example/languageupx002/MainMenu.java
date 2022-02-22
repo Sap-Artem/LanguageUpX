@@ -1,12 +1,8 @@
 package com.example.languageupx002;
 
-import static com.example.languageupx002.Table.chet;
-import static com.example.languageupx002.Table.flag;
 import static com.example.languageupx002.Table.flag2;
 import static com.example.languageupx002.Table.k;
 import static com.example.languageupx002.Table.lang;
-import static com.example.languageupx002.Table.rand1;
-import static com.example.languageupx002.Table.rand2;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,8 +29,20 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
-        SharedPreferences sp = getSharedPreferences("hasVisited",
-                Context.MODE_PRIVATE);
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
+        if (isFirstRun) {
+            //show start activity
+
+            startActivity(new Intent(MainMenu.this, Welcome.class));
+            Toast.makeText(MainMenu.this, "First Run", Toast.LENGTH_LONG)
+                    .show();
+        }
+
+
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("isFirstRun", false).commit();
         mPlayer = MediaPlayer.create(this, R.raw.music);
         if(flag2==0) {
             mPlayer.start();

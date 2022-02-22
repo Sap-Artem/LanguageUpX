@@ -26,6 +26,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Welcome">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Tools">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
