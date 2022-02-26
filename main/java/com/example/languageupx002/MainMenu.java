@@ -2,7 +2,10 @@ package com.example.languageupx002;
 
 import static com.example.languageupx002.Table.flag2;
 import static com.example.languageupx002.Table.k;
+import static com.example.languageupx002.Table.k2;
 import static com.example.languageupx002.Table.lang;
+import static com.example.languageupx002.Table.langw;
+import static com.example.languageupx002.Table.langtr;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,31 +27,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenu extends AppCompatActivity {
     DBhelper  db;
+    Db2 db2;
     MediaPlayer mPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
-        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getBoolean("isFirstRun", true);
-
-        if (isFirstRun) {
-            //show start activity
-
-            startActivity(new Intent(MainMenu.this, Welcome.class));
-            Toast.makeText(MainMenu.this, "First Run", Toast.LENGTH_LONG)
-                    .show();
-        }
-
-
-        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putBoolean("isFirstRun", false).commit();
-        mPlayer = MediaPlayer.create(this, R.raw.music);
-        if(flag2==0) {
-            mPlayer.start();
-            flag2 = 1;
-        }
         this.getSupportActionBar().hide();
+        db2 = new Db2(this);
+        SQLiteDatabase dbl = db2.getWritableDatabase();
+        Cursor c = dbl.query("mytable", null, null, null, null, null, null);
         k = 0;
         db = new DBhelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
@@ -64,6 +52,39 @@ public class MainMenu extends AppCompatActivity {
         } else
             Log.d("mLog","0 rows");
         cursor.close();
+        if (c.moveToFirst()) {
+            do {
+                k2 = k2 + 1;
+            } while (cursor.moveToNext());
+        } else
+            Log.d("mLog","0 rows");
+        cursor.close();
+        if(k == 0 & k2 == 0){
+            try {
+                Intent intent = new Intent(MainMenu.this, Welcome.class);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (c.moveToFirst()) {
+            int idColIndex0 = c.getColumnIndex("id");
+            int idColIndex = c.getColumnIndex("lang");
+            int nameColIndex = c.getColumnIndex("langw");
+            int emailColIndex = c.getColumnIndex("langtr");
+            do {
+                lang = c.getInt(idColIndex);
+                langw = c.getInt(nameColIndex);
+                langtr = c.getInt(emailColIndex);
+            } while (c.moveToNext());
+        }
+        c.close();
+        mPlayer = MediaPlayer.create(this, R.raw.music);
+        if(flag2==0) {
+            mPlayer.start();
+            flag2 = 1;
+        }
         final Button testButton = (Button) findViewById(R.id.button13);
         final ImageButton addButton = (ImageButton) findViewById(R.id.button15);
         final ImageButton listButton = (ImageButton) findViewById(R.id.button25);

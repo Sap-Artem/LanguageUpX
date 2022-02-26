@@ -6,7 +6,10 @@ import static com.example.languageupx002.Table.lang;
 import static com.example.languageupx002.Table.langw;
 import static com.example.languageupx002.Table.langtr;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,9 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Welcome extends AppCompatActivity {
+    Db2 db2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +76,16 @@ public class Welcome extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Change learning language/native language", Toast.LENGTH_SHORT);
         Toast finalToast = toast;
+        db2 = new Db2(this);
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase dbl = db2.getWritableDatabase();
         start.setOnClickListener((v) -> {
+            lang = langtr;
+            cv.put("lang", lang);
+            cv.put("langw", langw);
+            cv.put("langtr", langtr);
+            dbl.insert("mytable", null, cv);
             if(flag1 == 1 & flag3 == 1) {
-                lang = langtr;
                 try {
                     Intent intent = new Intent(Welcome.this, MainMenu.class);
                     startActivity(intent);

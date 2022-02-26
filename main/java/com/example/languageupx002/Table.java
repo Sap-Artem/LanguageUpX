@@ -9,6 +9,7 @@ public class Table extends SQLiteOpenHelper {
     public static final String DATA_NAME = "name";
     public static final String TABLE_CON = "tablelol";
     public static int k = 0;
+    public static int k2 = 0;
     public static int right = 0;
     public static int fail = 0;
     public static int rand1 = 0;
