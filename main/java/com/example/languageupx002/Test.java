@@ -4,6 +4,7 @@ import static com.example.languageupx002.Table.lang;
 import static com.example.languageupx002.Table.langtr;
 import static com.example.languageupx002.Table.langw;
 import static com.example.languageupx002.Table.pr;
+import static com.example.languageupx002.Table.reserve_id;
 
 
 import android.content.ContentValues;
@@ -26,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Test extends AppCompatActivity {
 
     DopDB db;
+    Db2 db2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +51,37 @@ public class Test extends AppCompatActivity {
         ImageButton langtrb = (ImageButton)findViewById(R.id.imageView20);
         ImageButton langtrw = (ImageButton)findViewById(R.id.imageView22);
         db = new DopDB(this);
+        db2 = new Db2(this);
         ContentValues contentValues = new ContentValues();
+        ContentValues cv = new ContentValues();
         SQLiteDatabase database = db.getWritableDatabase();
+        SQLiteDatabase db = db2.getWritableDatabase();
         database.insert(DopDB.TABLE_CONTACTS2, null, contentValues);
         Cursor cursor = database.query(DopDB.TABLE_CONTACTS2, null, null, null, null, null, null);
+        db.delete("mytable", null, null);
+        cv.put("lang", lang);
+        cv.put("langw", langw);
+        cv.put("langtr", langtr);
+        db.insert("mytable", null, cv);
+        Cursor c = db.query("mytable", null, null, null, null, null, null);
+        if (c.moveToFirst()) {
+
+            // определяем номера столбцов по имени в выборке
+            int idColIndex0 = c.getColumnIndex("id");
+            int idColIndex = c.getColumnIndex("lang");
+            int nameColIndex = c.getColumnIndex("langw");
+            int emailColIndex = c.getColumnIndex("langtr");
+
+            do {
+                // получаем значения по номерам столбцов и пишем все в лог
+                Log.d("mLog",
+                               "lang = " + c.getInt(idColIndex) +
+                                ", langw = " + c.getString(nameColIndex) +
+                                ", langtr = " + c.getString(emailColIndex));
+                // переход на следующую строку
+                // а если следующей нет (текущая - последняя), то false - выходим из цикла
+            } while (c.moveToNext());
+        }
         if (cursor.moveToFirst()) {
             int idIndex2 = cursor.getColumnIndex(DopDB.lol);
             int nameIndex2 = cursor.getColumnIndex(DopDB.SCORE);
